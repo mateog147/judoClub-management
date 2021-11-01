@@ -17,8 +17,9 @@
       <Label layoutX="232.0" layoutY="125.0" text="Periodo" />
       <Button fx:id="regresarBtn" layoutX="35.0" layoutY="340.0" mnemonicParsing="false" onMouseClicked="#regresar" text="&lt;-- Regresar" />
       <DatePicker fx:id="fechaPiecker" layoutX="220.0" layoutY="70.0" />
-      <TextField fx:id="montoTxt" layoutX="22.0" layoutY="148.0" />
-      <Label layoutX="224.0" layoutY="38.0" text="Judoka" />
-      <Label layoutX="22.0" layoutY="125.0" text="Judoka" />
+      <TextField fx:id="montoTxt" layoutX="22.0" layoutY="148.0" promptText="30000" />
+      <Label layoutX="224.0" layoutY="38.0" text="Fecha del pago" />
+      <Label layoutX="22.0" layoutY="125.0" text="Valor pagado" />
+      <Label fx:id="errorLbl" layoutX="192.0" layoutY="344.0" />
    </children>
 </AnchorPane>

@@ -10,7 +10,6 @@ public class App extends Application {
     }
     @Override
     public void start(Stage teatro) throws Exception {
-        
         Parent root = (new FXMLLoader(getClass().getResource("vistas/loginView.fxml"))).load();
         Scene obraLogin =new Scene(root);
         teatro.setTitle("Ingreso Usuario");
