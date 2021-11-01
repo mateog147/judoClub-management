@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.macController">
+   <children>
+      <Button fx:id="registroBtn" layoutX="81.0" layoutY="93.0" mnemonicParsing="false" onMouseClicked="#registrarUser" prefHeight="48.0" prefWidth="177.0" text="Registro nuevo Judoka">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button fx:id="pagoBtn" layoutX="403.0" layoutY="93.0" mnemonicParsing="false" onMouseClicked="#pagos" prefHeight="48.0" prefWidth="137.0" text="Pagos">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button fx:id="updateBtn" layoutX="81.0" layoutY="172.0" mnemonicParsing="false" onMouseClicked="#cargarUser" prefHeight="48.0" prefWidth="177.0" text="Actualizar datos Judoka">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button fx:id="astBtn" layoutX="403.0" layoutY="172.0" mnemonicParsing="false" onMouseClicked="#asistencia" prefHeight="48.0" prefWidth="137.0" text="Asistencia">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button fx:id="asenBtn" layoutX="403.0" layoutY="245.0" mnemonicParsing="false" onMouseClicked="#asenso" prefHeight="48.0" prefWidth="137.0" text="Asensos">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button fx:id="newAdminBtn" disable="true" layoutX="81.0" layoutY="245.0" mnemonicParsing="false" onContextMenuRequested="#newAdmin" opacity="0.0" prefHeight="48.0" prefWidth="177.0" text="Registrar Admin">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Label layoutX="192.0" layoutY="27.0" text="Club de Judo">
+         <font>
+            <Font name="System Bold Italic" size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

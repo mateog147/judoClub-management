@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="413.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.updateController">
+  <tabs>
+    <Tab text="Registro">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" opacity="0.92" prefHeight="401.0" prefWidth="600.0">
+               <children>
+                  <Label layoutX="151.0" layoutY="14.0" text="Consultar datos Judokas">
+                     <font>
+                        <Font name="System Bold Italic" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="52.0" layoutY="187.0" text="Nombre:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="53.0" layoutY="149.0" text="Tipo de doumento:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="52.0" layoutY="72.0" text="Numero de documento:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nombreRegistroTxt" disable="true" layoutX="52.0" layoutY="215.0" prefHeight="25.0" prefWidth="227.0" />
+                  <Label layoutX="371.0" layoutY="72.0" text="Nacimiento:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="cosTipoRegistroCB" layoutX="191.0" layoutY="147.0" prefHeight="25.0" prefWidth="87.0" />
+                  <TextField fx:id="docRegistroTxt" layoutX="52.0" layoutY="99.0" prefHeight="25.0" prefWidth="227.0" />
+                  <ComboBox fx:id="sexoCB" disable="true" layoutX="106.0" layoutY="253.0" prefHeight="25.0" prefWidth="87.0" />
+                  <Label layoutX="371.0" layoutY="147.0" text="Grado:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="nacimientoRegistro" disable="true" layoutX="371.0" layoutY="109.0" />
+                  <ComboBox fx:id="gradoRegistroCB" disable="true" layoutX="371.0" layoutY="176.0" prefHeight="25.0" prefWidth="173.0" />
+                  <DatePicker fx:id="fechaIngreso" disable="true" layoutX="371.0" layoutY="241.0" />
+                  <Label layoutX="371.0" layoutY="214.0" text="Fecha de ingreso:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="61.0" fitWidth="102.0" layoutX="492.0" layoutY="306.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="errorLbl" layoutX="57.0" layoutY="300.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="guardarBtn" disable="true" layoutX="462.0" layoutY="308.0" mnemonicParsing="false" onKeyPressed="#guardarUsr" onMouseClicked="#guardarUsr" prefHeight="59.0" prefWidth="102.0" text="Guardar">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button fx:id="regresarBtn" layoutX="52.0" layoutY="337.0" mnemonicParsing="false" onMouseClicked="#regresar" text="&lt;-- Regresar">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="57.0" layoutY="256.0" text="Sexo:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="buscarBtn" layoutX="289.0" layoutY="97.0" mnemonicParsing="false" onMouseClicked="#cargar" text="Buscar">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>
