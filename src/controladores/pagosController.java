@@ -27,6 +27,7 @@ import modelos.Judoka;
 
 public class pagosController{
     public List<Judoka> users = new ArrayList<Judoka>(); 
+
     @FXML
     private ComboBox<String> usrCbx;
 
@@ -52,9 +53,8 @@ public class pagosController{
     void pago(MouseEvent event) throws Exception{
         LocalDate fechaPago = fechaPiecker.getValue();
         String nombre = usrCbx.getValue();
-        String doc =" ";
         String periodo = mesesCB.getValue();
-
+        String doc="";
         //Valido las entradas
         if(montoTxt.getText() ==" " || montoTxt.getText().isEmpty()){
             errorLbl.setText("ERROR::Se debe ingresar el monto pagado");
