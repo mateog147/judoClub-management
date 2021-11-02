@@ -3,7 +3,7 @@ package modelos;
 import java.time.LocalDate;
 
 // La clase judoka corresponde a los miembros activos del club de judo 
-public class judoka {
+public class Judoka {
     //Atributos
     private String nombre;
     private String tipoDoc;
@@ -13,8 +13,8 @@ public class judoka {
     private LocalDate fechaIngreso;
 
     // constructores
-    public judoka(String nombre, String tipoDoc, String doc, String sexo, LocalDate fechaNacimiento,
-            LocalDate fechaIngreso) {
+    public Judoka(String nombre, String tipoDoc, String doc, String sexo, LocalDate fechaNacimiento,
+        LocalDate fechaIngreso) {
         this.nombre = nombre;
         this.tipoDoc = tipoDoc;
         this.doc = doc;
@@ -22,7 +22,13 @@ public class judoka {
         this.fechaNacimiento = fechaNacimiento;
         this.fechaIngreso = fechaIngreso;
     }
-    public judoka() {
+
+    public Judoka() {
+    }
+
+    public Judoka(String nombre,  String doc) {
+        this.nombre = nombre;
+        this.doc = doc;
     }
 
     //metodos de la clase 

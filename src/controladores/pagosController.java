@@ -23,9 +23,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import modelos.Constantes;
+import modelos.Judoka;
 
 public class pagosController{
-    private List<String[]> users = new ArrayList<String[]>(); 
+    public List<Judoka> users = new ArrayList<Judoka>(); 
     @FXML
     private ComboBox<String> usrCbx;
 
@@ -48,19 +49,52 @@ public class pagosController{
     private Label errorLbl;
 
     @FXML
-    void pago(MouseEvent event) {
+    void pago(MouseEvent event) throws Exception{
         LocalDate fechaPago = fechaPiecker.getValue();
         String nombre = usrCbx.getValue();
+        String doc =" ";
         String periodo = mesesCB.getValue();
+
+        //Valido las entradas
         if(montoTxt.getText() ==" " || montoTxt.getText().isEmpty()){
             errorLbl.setText("ERROR::Se debe ingresar el monto pagado");
         }
-        else{
-            int monto = Integer.parseInt(montoTxt.getText());
-            errorLbl.setText(" ");
+        else if(fechaPago == null){
+            errorLbl.setText("ERROR::Se debe ingresar una fecha");
         }
-        
-
+        else if(periodo ==" " || periodo==null){
+            errorLbl.setText("ERROR::Se debe ingresar el periodo");
+        }
+        else if(nombre==" " || nombre==null){
+            errorLbl.setText("ERROR::Se debe ingresar el periodo");
+        }
+        //Si las entradas estan Ok procedo a completar los dato sy registrat la info 
+        else{
+            //paso a entero el valor del monto 
+            int monto = Integer.parseInt(montoTxt.getText());
+            //busco la cedula del nombre selecionado
+            for(Judoka user : users){
+                if(user.getNombre().equals(nombre)){
+                    System.out.println(user);
+                    doc = user.getDoc();
+                }
+            }
+            Class.forName("org.sqlite.JDBC");
+            Connection conec = DriverManager.getConnection("jdbc:sqlite:"+Constantes.RUTA);
+            
+            try(Statement sta = conec.createStatement()){
+                int res = sta.executeUpdate("INSERT INTO pagos(documento, fecha, periodo, monto) VALUES('"+doc+"','"+fechaPago+"','"+periodo+"','"+monto+"')");
+                if(res>0){
+                    errorLbl.setText("Almacenado con exito");
+                    usrCbx.setValue("");
+                    montoTxt.setText("");
+                    mesesCB.setValue("");
+                    }else{
+                        errorLbl.setText("ERROR AL GUARDAR LOS DATOS");
+                    }
+            }
+            conec.close();
+        }
     }
 
 
@@ -78,7 +112,7 @@ public class pagosController{
 
     @FXML
     void initialize() throws Exception{
-        String vec[] = new String[2];
+        Judoka temp;
         String nombre, cedula;
 
         ObservableList<String> periodos = FXCollections.observableArrayList("DIC-ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV");
@@ -94,12 +128,13 @@ public class pagosController{
                 //System.out.println(res.getString("nombre"));
                 nombre = res.getString("nombre");
                 cedula = res.getString("numeroDocumento");
-                vec[0]=nombre;
-                vec[1]=cedula;
-                users.add(vec);
+                temp = new Judoka(nombre,cedula);
+                
+                users.add(temp);
                 judokas.add(res.getString("nombre"));
             }
         }
+        System.out.println(users);
         conec.close();
         usrCbx.setItems(judokas);
     }
