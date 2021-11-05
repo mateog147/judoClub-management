@@ -30,8 +30,15 @@ public class macController {
     private Button newAdminBtn;
 
     @FXML
-    void asenso(MouseEvent event) {
-
+    void asenso(MouseEvent event) throws Exception{
+        Stage teatro = new Stage();
+        Parent raiz = (new FXMLLoader(getClass().getResource("../vistas/ascensosView.fxml"))).load();
+        Scene obra =new Scene(raiz);
+        teatro.setTitle("Registrar nuevo grado"); 
+        teatro.setScene(obra);
+        teatro.show();
+        Stage teatrico = (Stage) this.registroBtn.getScene().getWindow();
+        teatrico.close();
     }
 
     @FXML
