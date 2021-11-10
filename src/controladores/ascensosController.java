@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -44,9 +46,41 @@ public class ascensosController {
     private Label errorLbl;
 
     @FXML
-    void pago(MouseEvent event) {
-
-    }
+    void guardar(MouseEvent event) throws Exception{
+        String nombre = usrCbx.getValue();
+        String grado = gradosCB.getValue();
+        String cc=buscarCedula(nombre);
+        LocalDate fecha = fechaPiecker.getValue();
+        //valido las entradas
+        if(nombre == "" ||  nombre.isEmpty()){
+            errorLbl.setText("Seleccione un nombre de la lista");
+        }else if(grado=="" || grado.isEmpty()){
+            errorLbl.setText("Seleccione un grado de la lista");
+        }else if(fecha==null){
+            errorLbl.setText("Seleccione una fecha a registrar");
+        }else{
+            Class.forName("org.sqlite.JDBC");
+            Connection conec = DriverManager.getConnection("jdbc:sqlite:"+Constantes.RUTA);
+            //Hago la consulta
+            try(Statement sta = conec.createStatement()){
+                int res = sta.executeUpdate("UPDATE ascensos SET estado='I' where documento == '"+cc+"' AND estado = 'A'");
+                if(res>0){
+                    //System.out.println("Si esta");
+                    int res2 = sta.executeUpdate("INSERT INTO ascensos (documento, fecha, grado) VALUES ('"+cc+"','"+fecha+"','"+grado+"')");
+                    if(res2>0){
+                        errorLbl.setText("Almacenado con exito");
+                    }else{
+                        errorLbl.setText("ERROR AL REGISTRAR EL NUEVO GRADO INTENTE NUEVAMENTE");
+                    }
+                    
+                }
+                else{
+                    errorLbl.setText("ERROR AL CARGAR LOS DATOS LOS DATOS, VERIFIQUE EL DOCUMENTO");
+                }
+            }
+            conec.close();
+            }
+        }
 
     @FXML
     void regresar(MouseEvent event) throws Exception{
@@ -58,6 +92,26 @@ public class ascensosController {
         teatro.show();
         Stage teatrico = (Stage) this.regresarBtn.getScene().getWindow();
         teatrico.close();
+    }
+
+    @FXML
+    void buscarJudoka(ActionEvent event) throws Exception{
+        String nombre = usrCbx.getValue();
+        String cc=buscarCedula(nombre);
+        Class.forName("org.sqlite.JDBC");
+        Connection conec = DriverManager.getConnection("jdbc:sqlite:"+Constantes.RUTA);
+        //Hago la consulta
+        try(Statement sta = conec.createStatement()){
+            ResultSet res = sta.executeQuery("SELECT * FROM ascensos where documento == '"+cc+"' AND estado = 'A'");
+            if(res.next()){
+                //System.out.println("Si esta");
+                gradosCB.setValue(res.getString("grado"));
+            }
+            else{
+                    errorLbl.setText("ERROR AL CARGAR LOS DATOS LOS DATOS, VERIFIQUE EL DOCUMENTO");
+            }
+        }
+        conec.close();
     }
 
     @FXML
@@ -88,6 +142,17 @@ public class ascensosController {
         conec.close();
         usrCbx.setItems(judokas);
     }
+
+    String buscarCedula(String nom){
+        String cc="";
+        for(Judoka user:users){
+            if(user.getNombre().equals(nom)){
+                cc = user.getDoc();
+            }
+        }
+        return cc;
+    }
+
 
 }
 

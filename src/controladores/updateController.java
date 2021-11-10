@@ -84,7 +84,7 @@ public class updateController implements Constantes{
                     this.cod=res.getInt("codigo");
                     this.cc1=res.getString("numeroDocumento");
                     //Busco en la tabla de acsensos
-                    ResultSet res2 = sta.executeQuery("SELECT * FROM ascensos where documento == '"+cc+"'");
+                    ResultSet res2 = sta.executeQuery("SELECT * FROM ascensos where documento == '"+cc+"' AND estado = 'A'");
                     //Si hay info la cargo 
                     if(res2.next()){
                         gradoRegistroCB.setValue(res2.getString("grado"));
